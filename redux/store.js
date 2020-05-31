@@ -27,17 +27,18 @@ const predictionData = [
 function predictionStore(state=predictionData, action) {
 	switch(action.type) {
 		case "ADD_PREDICTION":
-			return {...state,
+			return predictionData.push({
 				key: action.payload.key,
 				prediction: action.payload.prediction,
 				created_date: action.payload.created_date,
 				prob: action.payload.prob,
 				deadline: action.payload.deadline,
 				reasoning: action.payload.reasoning
-			}
+			})
 		default:
 			return state
 	}
+	console.log(getState())
 }
 
 export default createStore(predictionStore)

@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { View, FlatList, Text, TextInput } from 'react-native';
-import {ListItem, Input, Button } from "react-native-elements";
+import { View, FlatList, Text, TextInput, Button, Alert } from 'react-native';
+import {ListItem, Input, FormLabel, FormInput, FormValidationMessage } from "react-native-elements";
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Icon } from 'react-native-vector-icons/FontAwesome'
@@ -15,7 +15,7 @@ let addPrediction = () =>
   store.dispatch({
     type: 'ADD_PREDICTION',
     payload: {
-      key: '1',
+      key: 'z',
       prediction: '2',
       created_date: '3',
       prob: '4', 
@@ -76,36 +76,46 @@ function PredictionDetails({ route, navigation }) {
 }
 
 function Add({ route, navigation }) {
+  const [ prediction_value, onChangePredVal ] = React.useState('');
+  const [ deadline_value, onChangeDeadVal ] = React.useState('');
+  const [ probability_value, onChangeProbVal ] = React.useState('');
+  const [ reasoning_value, onChangeReasoningVal ] = React.useState('');
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Input
         label='Prediction'
-        value=''
         placeholder='Enter a quantifiable prediction.'
+        onChangeText={text => onChangePredVal(text)}
+        value={prediction_value}
       />
       <Input
         label= 'Deadline'
         placeholder='12/31/2020'
-        value=''
+        onChangeText={text => onChangeDeadVal(text)}
+        value={deadline_value}
       />
       <Input
         label= 'Probability'
         placeholder='50%'
-        value=''
+        onChangeText={text => onChangeProbVal(text)}
+        value={probability_value}
       />
       <Input
         label= 'Reasoning'
         placeholder='Why?'
-        value=''
+        onChangeText={text => onChangeReasoningVal(text)}
+        value={reasoning_value}
       />
       <View style={{ flexDirection: 'row'}}>
-      <Button 
-        title='Add'
-        style={{padding: 10}}
-        onPress={
-          addPrediction()
-        }
-       />
+        <Button
+          title="Add Prediction"
+          onPress={(prediction_value, deadline_value, probability_value, reasoning_value) => {
+            navigation.navigate('Predictions')
+            addPrediction()
+            console.log(store.getState())
+            }
+          }
+        />
       </View>
     </View>
   );
