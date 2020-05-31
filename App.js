@@ -4,6 +4,10 @@ import {ListItem, Input, Button } from "react-native-elements";
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Icon } from 'react-native-vector-icons/FontAwesome'
+import {store, persistor} from './redux/store'
+import {Provider} from 'react-redux'
+import { PersistGate } from 'redux-persist/integration/react'
+
 
 let predictionData = [
   {
