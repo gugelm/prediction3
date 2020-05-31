@@ -58,20 +58,20 @@ function DetailsScreen({ route, navigation }) {
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Input
         label='Prediction'
-        value={prediction}
+        value={prediction[0]}
         placeholder='Enter a quantifiable prediction.'
         onChangeText={value => searchFilterFunction(value)}
       />
       <Input
         label= 'Deadline'
-        value={deadline} 
+        value={deadline[0]} 
         placeholder='Enter a deadline'
       />
       <View style={{ flexDirection: 'row'}}>
       <Button 
         title='Done'
         style={{padding: 10}} 
-      />
+       />
       </View>
     </View>
   );
