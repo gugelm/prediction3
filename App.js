@@ -15,12 +15,12 @@ let addPrediction = () =>
   store.dispatch({
     type: 'ADD_PREDICTION',
     payload: {
-      key: 1,
-      prediction: 2,
-      created_date: 3,
-      prob: 4, 
-      deadline: 5,
-      reasoning: 6,
+      key: '1',
+      prediction: '2',
+      created_date: '3',
+      prob: '4', 
+      deadline: '5',
+      reasoning: '6',
     }
   })
 
