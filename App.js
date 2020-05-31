@@ -11,12 +11,12 @@ import { PersistGate } from 'redux-persist/integration/react'
 const predictionData = store.getState()
 let searchFilterFunction = (value) => {}
 
-let addPrediction = () =>
+let addPrediction = (prediction_value) =>
   store.dispatch({
     type: 'ADD_PREDICTION',
     payload: {
       key: 'z',
-      prediction: '2',
+      prediction: 'ok' + {prediction_value},
       created_date: '3',
       prob: '4', 
       deadline: '5',
@@ -24,6 +24,18 @@ let addPrediction = () =>
     }
   })
 
+let updatePrediction = (newPred) =>
+  store.dispatch({
+    type: 'UPDATE_PREDICTION',
+    payload: {
+      key: 'z',
+      prediction: 'ok' + {newPred},
+      created_date: '3',
+      prob: '4', 
+      deadline: '5',
+      reasoning: '6',
+    }
+  })
 
 function HomeScreen({ navigation }) {
   return ( 
@@ -52,23 +64,35 @@ function PredictionDetails({ route, navigation }) {
   const {key} = route.params
   const {prediction} = route.params
   const {deadline} = route.params
+  
+// i'm not using the actual state name...
+// and why the hell do i have to use prediction[0]
+  const [ prediction_value_edit, onChangePredValEdit ] = React.useState('');
+  const [ deadline_value_edit, onChangeDeadValEdit ] = React.useState('');
+
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Input
         label='Prediction'
         value={prediction[0]}
         placeholder='Enter a quantifiable prediction.'
-        onChangeText={value => searchFilterFunction(value)}
+        onChangeText={text => onChangePredValEdit(text)}
       />
       <Input
         label= 'Deadline'
         value={deadline[0]} 
         placeholder='Enter a deadline'
+        onChangeText={text => onChangeDeadValEdit(text)}
       />
       <View style={{ flexDirection: 'row'}}>
       <Button 
         title='Done'
         style={{padding: 10}} 
+        onPress={() => {
+            navigation.navigate('Predictions')
+            updatePrediction(prediction[0])
+            }
+          }
        />
       </View>
     </View>
@@ -109,10 +133,9 @@ function Add({ route, navigation }) {
       <View style={{ flexDirection: 'row'}}>
         <Button
           title="Add Prediction"
-          onPress={(prediction_value, deadline_value, probability_value, reasoning_value) => {
+          onPress={(prediction_value) => {
             navigation.navigate('Predictions')
-            addPrediction()
-            console.log(store.getState())
+            addPrediction(prediction_value)
             }
           }
         />
