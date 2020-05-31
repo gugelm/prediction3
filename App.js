@@ -4,34 +4,28 @@ import {ListItem, Input, Button } from "react-native-elements";
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Icon } from 'react-native-vector-icons/FontAwesome'
-import {store, persistor} from './redux/store'
-import {Provider} from 'react-redux'
+import store from './redux/store'
+import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
 
-
-let predictionData = [
-  {
-  "key":"1",
-  "prediction":"Instagram has peaked.",
-  "created_date":"5/1/2019",
-  "prob":"90%",
-  "deadline":"5/1/2022",
-  "reasoning": "My friends have stopped using it. People are tired of sees doggos and vacation and perfectly curated shots. Young kids are purposefully making their pics look like shit to be more authentic."
-  }, 
-  {
-  "key":"2",
-  "prediction":"Trump will win the 2020 election.",
-  "created_date":"10/8/2019",
-  "prob":"80%",
-  "deadline":"11/3/2020",
-  "reasoning": "From a trump’s supporters perspective, he’s done a good job. The economy is strong, he’s avoid conflict (e.g. Iran). Dems sense weakness i  their candidates and are pushing impeachment 1 year from the election. Kelly says 50% on 11/15/2019z"
-  }]
-let predictionList = predictionData
-
+const predictionData = store.getState()
 let searchFilterFunction = (value) => {}
 
+let addPrediction = () =>
+  store.dispatch({
+    type: 'ADD_PREDICTION',
+    payload: {
+      key: 1,
+      prediction: 2,
+      created_date: 3,
+      prob: 4, 
+      deadline: 5,
+      reasoning: 6,
+    }
+  })
+
+
 function HomeScreen({ navigation }) {
-  let [ predictionData, searchFilterFunction] = React.useState(predictionList);
   return ( 
     <View>
     <FlatList 
@@ -44,7 +38,7 @@ function HomeScreen({ navigation }) {
       chevron
       onPress={() =>
         navigation.navigate(
-          'DetailsScreen', 
+          'Prediction Details', 
           {key: [item.key], prediction: [item.prediction], deadline: [item.deadline]})
         }
       />
@@ -54,7 +48,7 @@ function HomeScreen({ navigation }) {
   );
 }
 
-function DetailsScreen({ route, navigation }) {
+function PredictionDetails({ route, navigation }) {
   const {key} = route.params
   const {prediction} = route.params
   const {deadline} = route.params
@@ -81,16 +75,73 @@ function DetailsScreen({ route, navigation }) {
   );
 }
 
+function Add({ route, navigation }) {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Input
+        label='Prediction'
+        value=''
+        placeholder='Enter a quantifiable prediction.'
+      />
+      <Input
+        label= 'Deadline'
+        placeholder='12/31/2020'
+        value=''
+      />
+      <Input
+        label= 'Probability'
+        placeholder='50%'
+        value=''
+      />
+      <Input
+        label= 'Reasoning'
+        placeholder='Why?'
+        value=''
+      />
+      <View style={{ flexDirection: 'row'}}>
+      <Button 
+        title='Add'
+        style={{padding: 10}}
+        onPress={
+          addPrediction()
+        }
+       />
+      </View>
+    </View>
+  );
+}
+
+function Login({ route, navigation }) {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Button title='Login' onPress={() => navigation.navigate('Predictions')} />
+    </View>
+  );
+}
+
 const Stack = createStackNavigator();
 function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="HomeScreen">
-        <Stack.Screen name="Predictions" component={HomeScreen} />
-        <Stack.Screen name="DetailsScreen" component={DetailsScreen} />
+      <Stack.Navigator initialRouteName="Predictions">
+        <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen 
+          name="Predictions" 
+          component={HomeScreen}
+          options={({ navigation, route }) => ({
+              headerRight: () => (
+              <Button
+                title='Add Prediction'
+                onPress={() => navigation.navigate('Add')}
+              />
+            )})}
+        />
+        <Stack.Screen name="Prediction Details" component={PredictionDetails} />
+        <Stack.Screen name="Add" component={Add} />
       </Stack.Navigator>
     </NavigationContainer>
   );
 }
 
 export default App;
+
