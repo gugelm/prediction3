@@ -1,0 +1,17 @@
+{
+  "name": "prediction3",
+  "displayName": "prediction3",
+  "expo": {
+    "name": "prediction3",
+    "slug": "prediction3",
+    "version": "1.0.0",
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
