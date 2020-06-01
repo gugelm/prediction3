@@ -1,9 +1,27 @@
+import store from '../redux/store'
 
 // action types
-export const UPDATE_PREDICTION = 'UPDATE_PREDICTION'
+export const ADD_PREDICTION = 'ADD_PREDICTION'
+export const DELETE_PREDICTION = 'DELETE_PREDICTION'
 
 // action creators
-export const updateUser = update => ({
-  type: UPDATE_PREDICTION,
-  payload: update,
-})
+export let addPrediction = (prediction_value) =>
+  store.dispatch({
+    type: ADD_PREDICTION,
+    payload: {
+      key: 'z',
+      prediction: 'ok' + {prediction_value},
+      created_date: 'z',
+      prob: '4', 
+      deadline: '5',
+      reasoning: '6',
+    }
+  })
+
+export let deletePrediction = () =>
+  store.dispatch({
+    type: DELETE_PREDICTION,
+    payload: {
+      key: '1',
+    }
+  })

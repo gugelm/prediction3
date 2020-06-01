@@ -5,11 +5,12 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Icon } from 'react-native-vector-icons/FontAwesome'
 import store from './redux/store'
-import { Provider } from 'react-redux'
+import { Provider, connect } from 'react-redux'
+import HomeScreen from './screens/HomeScreen'
+import PredictionDetails from './screens/PredictionDetails'
+import Add from './screens/Add'
+import Login from './screens/Login'
 // import { PersistGate } from 'redux-persist/integration/react'
-
-const predictionData = store.getState()
-let searchFilterFunction = (value) => {}
 
 let addPrediction = (prediction_value) =>
   store.dispatch({
@@ -32,132 +33,8 @@ let deletePrediction = () =>
     }
   })
 
-function HomeScreen({ navigation }) {
-  return ( 
-    <View>
-    <FlatList 
-    data={predictionData.prediction}
-    renderItem={({ item }) => (
-    <ListItem
-      key={item.key}
-      title={item.prediction}
-      bottomDivider
-      chevron
-      onPress={() =>
-        navigation.navigate(
-          'Prediction Details', 
-          {key: [item.key], prediction: [item.prediction], deadline: [item.deadline]})
-        }
-      />
-    )} 
-    />
-    </View>
-  );
-}
-
-function PredictionDetails({ route, navigation }) {
-  const {key} = route.params
-  const {prediction} = route.params
-  const {deadline} = route.params
-  
-// i'm not using the actual state name...
-// and why the hell do i have to use prediction[0]
-  const [ prediction_value_edit, onChangePredValEdit ] = React.useState('');
-  const [ deadline_value_edit, onChangeDeadValEdit ] = React.useState('');
-
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Input
-        label='Prediction'
-        value={prediction}
-        placeholder='Enter a quantifiable prediction.'
-        onChangeText={text => onChangePredValEdit(text)}
-      />
-      <Input
-        label= 'Deadline'
-        value={deadline} 
-        placeholder='Enter a deadline'
-        onChangeText={text => onChangeDeadValEdit(text)}
-      />
-      <View style={{ flexDirection: 'row'}}>
-      <Button 
-        title='Done'
-        style={{padding: 10}} 
-        onPress={() => {
-            navigation.navigate('Predictions')
-            updatePrediction(prediction[0])
-            }
-          }
-       />
-      <Button 
-        title='Delete'
-        style={{padding: 10}} 
-        onPress={() => {
-            navigation.navigate('Predictions')
-            deletePrediction(key[0])
-            }
-          }
-       />
-      </View>
-    </View>
-  );
-}
-
-function Add({ route, navigation }) {
-  const [ prediction_value, onChangePredVal ] = React.useState('');
-  const [ deadline_value, onChangeDeadVal ] = React.useState('');
-  const [ probability_value, onChangeProbVal ] = React.useState('');
-  const [ reasoning_value, onChangeReasoningVal ] = React.useState('');
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Input
-        label='Prediction'
-        placeholder='Enter a quantifiable prediction.'
-        onChangeText={text => onChangePredVal(text)}
-        value={prediction_value}
-      />
-      <Input
-        label= 'Deadline'
-        placeholder='12/31/2020'
-        onChangeText={text => onChangeDeadVal(text)}
-        value={deadline_value}
-      />
-      <Input
-        label= 'Probability'
-        placeholder='50%'
-        onChangeText={text => onChangeProbVal(text)}
-        value={probability_value}
-      />
-      <Input
-        label= 'Reasoning'
-        placeholder='Why?'
-        onChangeText={text => onChangeReasoningVal(text)}
-        value={reasoning_value}
-      />
-      <View style={{ flexDirection: 'row'}}>
-        <Button
-          title="Add Prediction"
-          onPress={(prediction_value) => {
-            navigation.navigate('Predictions')
-            addPrediction(prediction_value)
-            }
-          }
-        />
-      </View>
-    </View>
-  );
-}
-
-function Login({ route, navigation }) {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Button title='Login' onPress={() => navigation.navigate('Predictions')} />
-    </View>
-  );
-}
-
 const Stack = createStackNavigator();
-function App() {
+export function App() {
   return (
     <Provider store={store}>
     <NavigationContainer>
@@ -183,4 +60,6 @@ function App() {
 }
 
 export default App;
+
+
 
