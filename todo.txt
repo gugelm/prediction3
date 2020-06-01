@@ -1,3 +1,4 @@
+- the shape of the data is looking good. we need to use redux connect to subscribe to any state changes...
 - add the ability to mark if something happened
 - ability to edit and delete a prediction
 - ability to add a prediction (can currently only added fixed values)

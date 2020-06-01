@@ -6,7 +6,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { Icon } from 'react-native-vector-icons/FontAwesome'
 import store from './redux/store'
 import { Provider } from 'react-redux'
-import { PersistGate } from 'redux-persist/integration/react'
+// import { PersistGate } from 'redux-persist/integration/react'
 
 const predictionData = store.getState()
 let searchFilterFunction = (value) => {}
@@ -17,23 +17,18 @@ let addPrediction = (prediction_value) =>
     payload: {
       key: 'z',
       prediction: 'ok' + {prediction_value},
-      created_date: '3',
+      created_date: 'z',
       prob: '4', 
       deadline: '5',
       reasoning: '6',
     }
   })
 
-let updatePrediction = (newPred) =>
+let deletePrediction = () =>
   store.dispatch({
-    type: 'UPDATE_PREDICTION',
+    type: 'DELETE_PREDICTION',
     payload: {
-      key: 'z',
-      prediction: 'ok' + {newPred},
-      created_date: '3',
-      prob: '4', 
-      deadline: '5',
-      reasoning: '6',
+      key: '1',
     }
   })
 
@@ -41,7 +36,7 @@ function HomeScreen({ navigation }) {
   return ( 
     <View>
     <FlatList 
-    data={predictionData}
+    data={predictionData.prediction}
     renderItem={({ item }) => (
     <ListItem
       key={item.key}
@@ -74,13 +69,13 @@ function PredictionDetails({ route, navigation }) {
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Input
         label='Prediction'
-        value={prediction[0]}
+        value={prediction}
         placeholder='Enter a quantifiable prediction.'
         onChangeText={text => onChangePredValEdit(text)}
       />
       <Input
         label= 'Deadline'
-        value={deadline[0]} 
+        value={deadline} 
         placeholder='Enter a deadline'
         onChangeText={text => onChangeDeadValEdit(text)}
       />
@@ -91,6 +86,15 @@ function PredictionDetails({ route, navigation }) {
         onPress={() => {
             navigation.navigate('Predictions')
             updatePrediction(prediction[0])
+            }
+          }
+       />
+      <Button 
+        title='Delete'
+        style={{padding: 10}} 
+        onPress={() => {
+            navigation.navigate('Predictions')
+            deletePrediction(key[0])
             }
           }
        />
@@ -155,6 +159,7 @@ function Login({ route, navigation }) {
 const Stack = createStackNavigator();
 function App() {
   return (
+    <Provider store={store}>
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Predictions">
         <Stack.Screen name="Login" component={Login} />
@@ -173,6 +178,7 @@ function App() {
         <Stack.Screen name="Add" component={Add} />
       </Stack.Navigator>
     </NavigationContainer>
+    </Provider>
   );
 }
 

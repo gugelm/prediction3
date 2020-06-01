@@ -1,10 +1,11 @@
-import {createStore, applyMiddleware} from 'redux'
+import {createStore, applyMiddleware, combineReducers} from 'redux'
 import thunk from 'redux-thunk'
-import { persistStore, persistReducer } from 'redux-persist'
-import storage from 'redux-persist/lib/storage'
+// import { persistStore, persistReducer } from 'redux-persist'
+// import storage from 'redux-persist/lib/storage'
 
 import {updatePrediction} from './actions'
 import predictionReducer from './reducer'
+
 
 const predictionData = [
   {
@@ -27,36 +28,28 @@ const predictionData = [
   }]
 
 
-
-
 function predictionStore(state=predictionData, action) {
 	switch(action.type) {
 		case "ADD_PREDICTION":
-			return predictionData.push({
-				key: action.payload.key,
-				prediction: action.payload.prediction,
-				created_date: action.payload.created_date,
-				prob: action.payload.prob,
-				deadline: action.payload.deadline,
-				reasoning: action.payload.reasoning
-			})
-		/* case "UPDATE_PREDICTION":
-			return (...predictionData, ({
-				key: action.payload.key,
-				prediction: action.payload.prediction,
-				created_date: action.payload.created_date,
-				prob: action.payload.prob,
-				deadline: action.payload.deadline,
-				reasoning: action.payload.reasoning
-			}) */
+			console.log('firing ADD_PREDICTION!')
+			return [...predictionData, action.payload]
+		case "DELETE_PREDICTION":
+			return predictionData.filter(function (el) {
+				return el.key == '1'})
 		//add case happened and didn't happen
 		default:
 			return state
 	}
-	console.log(getState())
 }
 
-export default createStore(predictionStore)
+
+
+export const reducer = combineReducers({
+  prediction: predictionStore,
+})
+
+
+export default createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
 
 /* const persistConfig = {
   key: 'root',
