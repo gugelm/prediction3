@@ -4,7 +4,7 @@ import { Input } from "react-native-elements";
 import store from '../redux/store'
 import { connect } from 'react-redux'
 import HomeScreen from './HomeScreen'
-import addPrediction from '../redux/actions'
+import { addPrediction } from '../redux/actions'
 
 function Add({ route, navigation }) {
   const [ prediction_value, onChangePredVal ] = React.useState('');
@@ -52,7 +52,7 @@ function Add({ route, navigation }) {
 }
 
 const mapStateToProps3 =  state => ({
-  prediction: state.prediction,
+  prediction: state,
 })
 
 export default connect(mapStateToProps3)(Add)

@@ -54,7 +54,7 @@ function PredictionDetails({ route, navigation }) {
 }
 
 const mapStateToProps2 =  state => ({
-  prediction: state.prediction,
+  prediction: state,
 })
 
 export default connect(mapStateToProps2)(PredictionDetails)

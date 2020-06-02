@@ -5,12 +5,12 @@ export const ADD_PREDICTION = 'ADD_PREDICTION'
 export const DELETE_PREDICTION = 'DELETE_PREDICTION'
 
 // action creators
-export let addPrediction = (prediction_value) =>
+export let addPrediction = () =>
   store.dispatch({
     type: ADD_PREDICTION,
     payload: {
       key: 'z',
-      prediction: 'ok' + {prediction_value},
+      prediction: 'ok',
       created_date: 'z',
       prob: '4', 
       deadline: '5',

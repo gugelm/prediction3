@@ -13,7 +13,7 @@ function Login({ route, navigation }) {
 }
 
 const mapStateToProps4 =  state => ({
-  prediction: state.prediction,
+  prediction: state,
 })
 
 export default connect(mapStateToProps4)(Login)
