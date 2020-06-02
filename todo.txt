@@ -1,5 +1,6 @@
-- i need to stop using getStore and use connect...but it's not working...
-- add the ability to mark if something happened
+- why can i only add 1 prediction?
+https://redux.js.org/recipes/structuring-reducers/immutable-update-patterns#inserting-and-removing-items-in-arrays
+
 - ability to edit and delete a prediction
-- ability to add a prediction (can currently only added fixed values)
+- add the ability to mark if something happened
 - calculate brier scores

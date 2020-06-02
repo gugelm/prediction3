@@ -1,13 +1,12 @@
 import * as React from 'react';
 import { View, FlatList } from 'react-native';
 import {ListItem } from "react-native-elements";
-import { connect } from 'react-redux'
+import { useSelector, connect } from 'react-redux'
 import store from '../redux/store'
 
 let prediction = []
 const predictionData = [
   {
-  "key":"1",
   "prediction":"Instagram has peaked.",
   "created_date":"5/1/2019",
   "prob":"90%",
@@ -16,7 +15,6 @@ const predictionData = [
   "happened": "Pending"
   }, 
   {
-  "key":"2",
   "prediction":"Trump will win the 2020 election.",
   "created_date":"10/8/2019",
   "prob":"80%",
@@ -25,14 +23,15 @@ const predictionData = [
   "happened": "Yes"
   }]
 
-function HomeScreen({ navigation }) {
+export default function HomeScreen({ navigation }) {
+  const predictionData = useSelector(state => state.prediction)
   return ( 
     <View>
     <FlatList 
     data={predictionData}
     renderItem={({ item }) => (
     <ListItem
-      key={item.key}
+      key={item.prediction}
       title={item.prediction}
       bottomDivider
       chevron
@@ -47,10 +46,3 @@ function HomeScreen({ navigation }) {
     </View>
   );
 }
-
-const mapStateToProps =  state => ({
-  prediction: state,
-})
-
-// argument 1 = part of the state you wanna subscribe to and pass, argument 2 = your new function / class
-export default connect(mapStateToProps)(HomeScreen);

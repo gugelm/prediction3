@@ -5,35 +5,17 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Icon } from 'react-native-vector-icons/FontAwesome'
 import store from './redux/store'
-import { Provider, connect } from 'react-redux'
+import { Provider, useSelector, useDispatch } from 'react-redux'
 import HomeScreen from './screens/HomeScreen'
 import PredictionDetails from './screens/PredictionDetails'
 import Add from './screens/Add'
 import Login from './screens/Login'
+import { addPrediction } from './redux/actions'
 // import { PersistGate } from 'redux-persist/integration/react'
 
-let addPrediction = (prediction_value) =>
-  store.dispatch({
-    type: 'ADD_PREDICTION',
-    payload: {
-      key: 'z',
-      prediction: 'ok' + {prediction_value},
-      created_date: 'z',
-      prob: '4', 
-      deadline: '5',
-      reasoning: '6',
-    }
-  })
-
-let deletePrediction = () =>
-  store.dispatch({
-    type: 'DELETE_PREDICTION',
-    payload: {
-      key: '1',
-    }
-  })
-
 const Stack = createStackNavigator();
+
+
 export function App() {
   return (
     <Provider store={store}>

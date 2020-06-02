@@ -2,15 +2,17 @@ import * as React from 'react';
 import { View, Button } from 'react-native';
 import { Input } from "react-native-elements";
 import store from '../redux/store'
-import { connect } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import HomeScreen from './HomeScreen'
 import { addPrediction } from '../redux/actions'
 
-function Add({ route, navigation }) {
+export default function Add({ route, navigation }) {
+  const dispatch = useDispatch()
   const [ prediction_value, onChangePredVal ] = React.useState('');
   const [ deadline_value, onChangeDeadVal ] = React.useState('');
   const [ probability_value, onChangeProbVal ] = React.useState('');
   const [ reasoning_value, onChangeReasoningVal ] = React.useState('');
+  const now = Date.now()
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Input
@@ -41,8 +43,8 @@ function Add({ route, navigation }) {
         <Button
           title="Add Prediction"
           onPress={() => {
-            navigation.navigate('Predictions')
-            addPrediction()
+                dispatch(addPrediction(prediction_value, deadline_value, probability_value, reasoning_value, now))
+                navigation.navigate('Predictions')
             }
           }
         />
@@ -50,9 +52,3 @@ function Add({ route, navigation }) {
     </View>
   );
 }
-
-const mapStateToProps3 =  state => ({
-  prediction: state,
-})
-
-export default connect(mapStateToProps3)(Add)

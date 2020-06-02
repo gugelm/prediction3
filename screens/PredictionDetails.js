@@ -2,19 +2,15 @@ import * as React from 'react';
 import { View, Button } from 'react-native';
 import { Input } from "react-native-elements";
 import store from '../redux/store'
-import { connect } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { deletePrediction } from '../redux/actions'
 
-function PredictionDetails({ route, navigation }) {
+export default function PredictionDetails({ route, navigation }) {
   const {key} = route.params
   const {prediction} = route.params
   const {deadline} = route.params
   
-// i'm not using the actual state name...
-// and why the hell do i have to use prediction[0]
-  const [ prediction_value_edit, onChangePredValEdit ] = React.useState('');
-  const [ deadline_value_edit, onChangeDeadValEdit ] = React.useState('');
-
+  const dispatch = useDispatch()
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Input
@@ -43,8 +39,8 @@ function PredictionDetails({ route, navigation }) {
         title='Delete'
         style={{padding: 10}} 
         onPress={() => {
-            navigation.navigate('Predictions')
-            deletePrediction(key[0])
+                dispatch(deletePrediction())
+                navigation.navigate('Predictions')
             }
           }
        />
@@ -52,9 +48,3 @@ function PredictionDetails({ route, navigation }) {
     </View>
   );
 }
-
-const mapStateToProps2 =  state => ({
-  prediction: state,
-})
-
-export default connect(mapStateToProps2)(PredictionDetails)

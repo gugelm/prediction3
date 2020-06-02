@@ -31,7 +31,6 @@ const predictionData = [
 function predictionStore(state=predictionData, action) {
 	switch(action.type) {
 		case "ADD_PREDICTION":
-			console.log('firing ADD_PREDICTION!')
 			return [...predictionData, action.payload]
 		case "DELETE_PREDICTION":
 			return predictionData.filter(function (el) {
@@ -42,12 +41,9 @@ function predictionStore(state=predictionData, action) {
 	}
 }
 
-
-
 export const reducer = combineReducers({
   prediction: predictionStore,
 })
-
 
 export default createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
 
