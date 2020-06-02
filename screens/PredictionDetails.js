@@ -6,22 +6,48 @@ import { useDispatch } from 'react-redux'
 import { deletePrediction } from '../redux/actions'
 
 export default function PredictionDetails({ route, navigation }) {
+  
   const {key} = route.params
   const {prediction} = route.params
   const {deadline} = route.params
+  const {prob} = route.params
+  const {reasoning} = route.params
+
   
+
   const dispatch = useDispatch()
+  const [ predictionEdit, onChangePredVal ] = React.useState({prediction});
+  const [ deadline_value, onChangeDeadVal ] = React.useState('');
+  const [ probability_value, onChangeProbVal ] = React.useState('');
+  const [ reasoning_value, onChangeReasoningVal ] = React.useState('');
+  const now = Date.now()
+
+console.log({prediction})
+console.log({predictionEdit})
+
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Input
         label='Prediction'
-        value={prediction[0]}
+        value= { predictionEdit }
         placeholder='Enter a quantifiable prediction.'
-        onChangeText={text => onChangePredValEdit(text)}
+        onChangeText={text => onChangePredVal(text)}
       />
       <Input
         label= 'Deadline'
-        value={deadline[0]} 
+        value={deadline} 
+        placeholder='Enter a deadline'
+        onChangeText={text => onChangeDeadValEdit(text)}
+      />
+      <Input
+        label= 'Probability'
+        value={prob} 
+        placeholder='Enter a deadline'
+        onChangeText={text => onChangeDeadValEdit(text)}
+      />
+      <Input
+        label= 'Reasoning'
+        value={reasoning} 
         placeholder='Enter a deadline'
         onChangeText={text => onChangeDeadValEdit(text)}
       />

@@ -1,6 +1,4 @@
-- why can i only add 1 prediction?
-https://redux.js.org/recipes/structuring-reducers/immutable-update-patterns#inserting-and-removing-items-in-arrays
-
+- why is it showing object object in predictiondetails.js?
 - ability to edit and delete a prediction
 - add the ability to mark if something happened
 - calculate brier scores

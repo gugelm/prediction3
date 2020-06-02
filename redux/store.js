@@ -7,7 +7,7 @@ import {updatePrediction} from './actions'
 import predictionReducer from './reducer'
 
 
-const predictionData = [
+let predictionData = [
   {
   "key":"1",
   "prediction":"Instagram has peaked.",
@@ -27,11 +27,11 @@ const predictionData = [
   "happened": "Yes"
   }]
 
-
+// https://redux.js.org/recipes/structuring-reducers/immutable-update-patterns#inserting-and-removing-items-in-arrays
 function predictionStore(state=predictionData, action) {
 	switch(action.type) {
 		case "ADD_PREDICTION":
-			return [...predictionData, action.payload]
+			return predictionData = [...predictionData, ...action.payload]
 		case "DELETE_PREDICTION":
 			return predictionData.filter(function (el) {
 				return el.key == '1'})
