@@ -10,6 +10,7 @@ import HomeScreen from './screens/HomeScreen'
 import PredictionDetails from './screens/PredictionDetails'
 import Add from './screens/Add'
 import Login from './screens/Login'
+import Brier from './screens/Brier'
 import { addPrediction } from './redux/actions'
 
 
@@ -36,6 +37,7 @@ export function App() {
         />
         <Stack.Screen name="Prediction Details" component={PredictionDetails} />
         <Stack.Screen name="Add" component={Add} />
+        <Stack.Screen name="Brier" component={Brier} />
       </Stack.Navigator>
     </NavigationContainer>
     </Provider>

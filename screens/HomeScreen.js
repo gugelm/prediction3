@@ -1,11 +1,13 @@
 import * as React from 'react';
 import { View, FlatList } from 'react-native';
-import {ListItem } from "react-native-elements";
+import { ListItem, Button } from "react-native-elements";
 import { useSelector, connect } from 'react-redux'
 import store from '../redux/store'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import Login from './Login'
+import Brier from './Brier'
+import Icon from 'react-native-vector-icons/FontAwesome'
 
 const Tab = createBottomTabNavigator();
 let prediction = []
@@ -30,12 +32,8 @@ const predictionData = [
 export default function HomeScreen({ navigation }) {
   const predictionData = useSelector(state => state.prediction)
   return ( 
-    
-    // <Tab.Navigator>
-    //   <Tab.Screen name="Predictions" component={HomeScreen} />
-    //   <Tab.Screen name="Login" component={Login} />
-    // </Tab.Navigator>
 
+  <View style={{flex: 1}}>
   <View>
     <FlatList 
     data={predictionData}
@@ -54,6 +52,42 @@ export default function HomeScreen({ navigation }) {
     )} 
     />
   </View>
-
+  <View style={{ flexDirection: 'row', justifyContent: 'center', backgroundColor: 'white', position: 'absolute', left: 0, right: 0, bottom: 0}}>
+      <Button 
+        title=' Predictions'
+        icon={
+            <Icon
+              name="arrow-circle-right"
+              size={18}
+              color='rgb(32, 137, 220)'
+            />
+          }
+        type='clear'
+        buttonStyle={{width:150, padding: 10}} 
+        containerStyle={{padding:10}}
+        onPress={() => {
+                navigation.navigate('HomeScreen')
+            }
+          }
+       />
+       <Button 
+        title=' Brier Score'
+        icon={
+            <Icon
+              name="check-circle"
+              size={18}
+              color='rgb(32, 137, 220)'
+            />
+          }
+        type='clear'
+        buttonStyle={{width:150, padding: 10}} 
+        containerStyle={{padding:10}}
+        onPress={() => {
+                navigation.navigate('Brier')
+            }
+          }
+       />
+  </View> 
+  </View>   
   );
 }

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, ScrollView } from 'react-native';
 import { Input, ButtonGroup, Button } from "react-native-elements";
 import store from '../redux/store'
 import { useDispatch, useSelector } from 'react-redux'
@@ -28,26 +28,30 @@ export default function PredictionDetails({ route, navigation }) {
   console.log(happenedEdit)
 
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-start', paddingTop: 25 }}>
       <Input
+        inputContainerStyle={{marginBottom: 25}}
         label='Prediction'
         value= {predictionEdit}
         placeholder='Enter a quantifiable prediction.'
         onChangeText={text => onChangePredVal(text)}
       />
       <Input
+        inputContainerStyle={{marginBottom: 25}}
         label= 'Deadline'
         value={deadlineEdit} 
         placeholder='Enter a deadline'
         onChangeText={text => onChangeDeadVal(text)}
       />
       <Input
+        inputContainerStyle={{marginBottom: 25}}
         label= 'Probability'
         value={probabilityEdit} 
         placeholder='Enter a deadline'
         onChangeText={text => onChangeProbVal(text)}
       />
       <Input
+        inputContainerStyle={{marginBottom: 25}}
         label= 'Reasoning'
         value={reasoningEdit} 
         placeholder='Enter a deadline'
@@ -60,7 +64,7 @@ export default function PredictionDetails({ route, navigation }) {
         onPress={text => onChangeHappenedVal(text)}
         containerStyle={{alignSelf: 'flex-start', width: 400}}
       />
-      <View style={{ flexDirection: 'row'}}>
+      <View style={{ flexDirection: 'row', justifyContent: 'center', backgroundColor: 'white', position: 'absolute', left: 0, right: 0, bottom: 0}}>
       <Button 
         title='Save'
         buttonStyle={{width:150, padding: 10}} 
