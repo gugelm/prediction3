@@ -4,6 +4,9 @@ import {updatePrediction} from './actions'
 // import { persistStore, persistReducer } from 'redux-persist'
 // import storage from 'redux-persist/lib/storage'
 
+// Happened: 
+// 0 = Waiting, 1 = Happened, 2 = Didn't Happen
+
 let predictionData = [
   {
   "key":"1",
@@ -12,7 +15,7 @@ let predictionData = [
   "prob":"90%",
   "deadline":"5/1/2022",
   "reasoning": "My friends have stopped using it. People are tired of sees doggos and vacation and perfectly curated shots. Young kids are purposefully making their pics look like shit to be more authentic.",
-  "happened": "Pending"
+  "happened": 0
   }, 
   {
   "key":"2",
@@ -21,7 +24,7 @@ let predictionData = [
   "prob":"80%",
   "deadline":"11/3/2020",
   "reasoning": "From a trump’s supporters perspective, he’s done a good job. The economy is strong, he’s avoid conflict (e.g. Iran). Dems sense weakness i  their candidates and are pushing impeachment 1 year from the election. Kelly says 50% on 11/15/2019z",
-  "happened": "Yes"
+  "happened": 1
   }]
 
 // https://redux.js.org/recipes/structuring-reducers/immutable-update-patterns#inserting-and-removing-items-in-arrays

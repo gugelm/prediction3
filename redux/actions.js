@@ -30,7 +30,9 @@ export let deletePrediction = (predictionEdit) =>
     }
   })
 
-export let updatePrediction = (predictionEdit, deadlineEdit, probabilityEdit, reasoningEdit, now, key) =>
+// Happened: 0 = Waiting, 1 = Happened, 2 = Didn't Happen
+
+export let updatePrediction = (predictionEdit, deadlineEdit, probabilityEdit, reasoningEdit, now, key, happenedEdit) =>
   ({
     type: UPDATE_PREDICTION,
     payload: [{
@@ -40,5 +42,6 @@ export let updatePrediction = (predictionEdit, deadlineEdit, probabilityEdit, re
       prob: probabilityEdit, 
       deadline: deadlineEdit,
       reasoning: reasoningEdit,
+      happened: happenedEdit,
     }]
   })
