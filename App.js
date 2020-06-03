@@ -3,7 +3,6 @@ import { View, FlatList, Text, TextInput, Button, Alert } from 'react-native';
 import {ListItem, Input, FormLabel, FormInput, FormValidationMessage } from "react-native-elements";
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Icon } from 'react-native-vector-icons/FontAwesome'
 import store from './redux/store'
 import { Provider, useSelector, useDispatch } from 'react-redux'
@@ -17,16 +16,6 @@ import { addPrediction } from './redux/actions'
 // import { PersistGate } from 'redux-persist/integration/react'
 
 const Stack = createStackNavigator();
-const Tab = createBottomTabNavigator();
-
-function Tabs() {
-  return (
-  <Tab.Navigator>
-    <Tab.Screen name="Home" component={HomeScreen} />
-    <Tab.Screen name="Add" component={Add} />
-  </Tab.Navigator>
-  )
-}
 
 export function App() {
   return (

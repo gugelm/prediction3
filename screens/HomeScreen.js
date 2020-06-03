@@ -3,7 +3,11 @@ import { View, FlatList } from 'react-native';
 import {ListItem } from "react-native-elements";
 import { useSelector, connect } from 'react-redux'
 import store from '../redux/store'
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { NavigationContainer } from '@react-navigation/native';
+import Login from './Login'
 
+const Tab = createBottomTabNavigator();
 let prediction = []
 const predictionData = [
   {
@@ -26,7 +30,13 @@ const predictionData = [
 export default function HomeScreen({ navigation }) {
   const predictionData = useSelector(state => state.prediction)
   return ( 
-    <View>
+    
+    // <Tab.Navigator>
+    //   <Tab.Screen name="Predictions" component={HomeScreen} />
+    //   <Tab.Screen name="Login" component={Login} />
+    // </Tab.Navigator>
+
+  <View>
     <FlatList 
     data={predictionData}
     renderItem={({ item }) => (
@@ -43,6 +53,7 @@ export default function HomeScreen({ navigation }) {
       />
     )} 
     />
-    </View>
+  </View>
+
   );
 }

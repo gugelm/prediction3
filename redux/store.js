@@ -1,11 +1,8 @@
 import {createStore, applyMiddleware, combineReducers} from 'redux'
 import thunk from 'redux-thunk'
+import {updatePrediction} from './actions'
 // import { persistStore, persistReducer } from 'redux-persist'
 // import storage from 'redux-persist/lib/storage'
-
-import {updatePrediction} from './actions'
-import predictionReducer from './reducer'
-
 
 let predictionData = [
   {
@@ -33,8 +30,9 @@ function predictionStore(state=predictionData, action) {
 		case "ADD_PREDICTION":
 			return predictionData = [...predictionData, ...action.payload]
 		case "DELETE_PREDICTION":
-			return predictionData.filter(function (el) {
-				return el.key == '1'})
+      return predictionData = predictionData.filter(a => a.prediction !== action.payload.prediction)
+    case "UPDATE_PREDICTION":
+      return predictionData = Object.values({...predictionData, ...action.payload})
 		//add case happened and didn't happen
 		default:
 			return state
