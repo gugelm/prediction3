@@ -66,7 +66,7 @@ export default function HomeScreen({ navigation }) {
         buttonStyle={{width:150, padding: 10}} 
         containerStyle={{padding:10}}
         onPress={() => {
-                navigation.navigate('HomeScreen')
+                navigation.navigate('Predictions')
             }
           }
        />

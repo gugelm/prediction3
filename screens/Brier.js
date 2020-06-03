@@ -44,7 +44,7 @@ export default function Brier({ route, navigation }) {
         buttonStyle={{width:150, padding: 10}} 
         containerStyle={{padding:10}}
         onPress={() => {
-                navigation.navigate('Predictions')
+                navigation.navigate('Brier')
             }
           }
        />

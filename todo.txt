@@ -1,4 +1,2 @@
-- why is it showing object object in predictiondetails.js?
-- ability to edit and delete a prediction
-- add the ability to mark if something happened
 - calculate brier scores
+- implement redux persist
