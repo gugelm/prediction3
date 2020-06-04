@@ -2,7 +2,7 @@ import * as React from 'react';
 import { View, FlatList } from 'react-native';
 import { ListItem, Button } from "react-native-elements";
 import { useSelector, connect } from 'react-redux'
-import store from '../redux/store'
+import { store } from '../redux/store'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import Login from './Login'
@@ -29,6 +29,21 @@ const predictionData = [
   "happened": "Yes"
   }]
 
+// Happened: 
+// 0 = Waiting, 1 = Happened, 2 = Didn't Happen
+
+function a (happened) {
+  if(happened == 0){ return 'Waiting results'} 
+  if(happened == 1){ return 'Happened'} 
+    else {return 'Didn\'t happen'}
+}
+
+function b (happened) {
+  if(happened == 0){ return {color:'rgb(220, 147, 12)'}} 
+  if(happened == 1){ return {color:'green'}} 
+    else {return {color:'red'}}
+}
+
 export default function HomeScreen({ navigation }) {
   const predictionData = useSelector(state => state.prediction)
   return ( 
@@ -40,6 +55,8 @@ export default function HomeScreen({ navigation }) {
     renderItem={({ item }) => (
     <ListItem
       key={item.prediction}
+      subtitle={a(item.happened)}
+      subtitleStyle={b(item.happened)}
       title={item.prediction}
       bottomDivider
       chevron

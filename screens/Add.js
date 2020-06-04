@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { View, Button } from 'react-native';
 import { Input } from "react-native-elements";
-import store from '../redux/store'
+import { store } from '../redux/store'
 import { useDispatch } from 'react-redux'
 import HomeScreen from './HomeScreen'
 import { addPrediction } from '../redux/actions'

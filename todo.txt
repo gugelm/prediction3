@@ -1,2 +1,4 @@
+- bug with changing the 2nd prediction...
+- add icons to the predictions based on whether they happened
+- fix bottom nav
 - calculate brier scores
-- implement redux persist

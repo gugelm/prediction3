@@ -1,7 +1,5 @@
-import store from '../redux/store'
+import { store } from '../redux/store'
 import { useDispatch } from 'react-redux'
-
-// export const dispatch = useDispatch()
 
 // action types
 export const ADD_PREDICTION = 'ADD_PREDICTION'
@@ -19,6 +17,7 @@ export let addPrediction = (prediction_value, deadline_value, probability_value,
       prob: probability_value, 
       deadline: deadline_value,
       reasoning: reasoning_value,
+      happened: 0
     }]
   })
 

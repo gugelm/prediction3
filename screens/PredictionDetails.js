@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { View, Text, ScrollView } from 'react-native';
 import { Input, ButtonGroup, Button } from "react-native-elements";
-import store from '../redux/store'
+import { store } from '../redux/store'
 import { useDispatch, useSelector } from 'react-redux'
 import { deletePrediction, updatePrediction } from '../redux/actions'
 

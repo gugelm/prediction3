@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { View, Button } from 'react-native';
-import store from '../redux/store'
+import { store } from '../redux/store'
 import { connect } from 'react-redux'
 import HomeScreen from './HomeScreen'
 

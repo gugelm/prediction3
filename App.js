@@ -4,7 +4,7 @@ import {ListItem, Input, FormLabel, FormInput, FormValidationMessage } from "rea
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Icon } from 'react-native-vector-icons/FontAwesome'
-import store from './redux/store'
+import { store, persistor } from './redux/store'
 import { Provider, useSelector, useDispatch } from 'react-redux'
 import HomeScreen from './screens/HomeScreen'
 import PredictionDetails from './screens/PredictionDetails'
@@ -12,15 +12,17 @@ import Add from './screens/Add'
 import Login from './screens/Login'
 import Brier from './screens/Brier'
 import { addPrediction } from './redux/actions'
+import { PersistGate } from 'redux-persist/integration/react'
 
-
-// import { PersistGate } from 'redux-persist/integration/react'
+// DISABLE THIS WHEN YOU WANT PRESISTOR TO WORK
+persistor.purge()
 
 const Stack = createStackNavigator();
 
 export function App() {
   return (
     <Provider store={store}>
+    <PersistGate loading={null} persistor={persistor}>
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Predictions">
         <Stack.Screen name="Login" component={Login} />
@@ -40,6 +42,7 @@ export function App() {
         <Stack.Screen name="Brier" component={Brier} />
       </Stack.Navigator>
     </NavigationContainer>
+    </PersistGate>
     </Provider>
   );
 }
