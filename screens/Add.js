@@ -13,6 +13,7 @@ export default function Add({ route, navigation }) {
   const [ probability_value, onChangeProbVal ] = React.useState('');
   const [ reasoning_value, onChangeReasoningVal ] = React.useState('');
   const now = Date.now()
+  
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Input

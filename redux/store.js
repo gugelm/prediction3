@@ -15,7 +15,7 @@ let predictionData = [
   "prob":.9,
   "deadline":"5/1/2022",
   "reasoning": "My friends have stopped using it. People are tired of sees doggos and vacation and perfectly curated shots. Young kids are purposefully making their pics look like shit to be more authentic.",
-  "happened": 0
+  "happened": 1
   }, 
   {
   "key":"2",

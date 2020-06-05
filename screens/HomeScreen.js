@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, FlatList } from 'react-native';
+import { View, FlatList, ScrollView } from 'react-native';
 import { ListItem, Button } from "react-native-elements";
 import { useSelector, connect } from 'react-redux'
 import { store } from '../redux/store'
@@ -13,6 +13,7 @@ const Tab = createBottomTabNavigator();
 let prediction = []
 const predictionData = [
   {
+  "key": "1",
   "prediction":"Instagram has peaked.",
   "created_date":"5/1/2019",
   "prob":"90%",
@@ -21,6 +22,7 @@ const predictionData = [
   "happened": "Pending"
   }, 
   {
+  "key": "2",
   "prediction":"Trump will win the 2020 election.",
   "created_date":"10/8/2019",
   "prob":"80%",
@@ -54,7 +56,7 @@ export default function HomeScreen({ navigation }) {
     data={predictionData}
     renderItem={({ item }) => (
     <ListItem
-      key={item.prediction}
+      key={item.now}
       subtitle={a(item.happened)}
       subtitleStyle={b(item.happened)}
       title={item.prediction}

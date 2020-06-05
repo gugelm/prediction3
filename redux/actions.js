@@ -11,7 +11,7 @@ export let addPrediction = (prediction_value, deadline_value, probability_value,
   ({
     type: ADD_PREDICTION,
     payload: [{
-      key: `$now`,
+      key: now,
       prediction: prediction_value,
       created_date: now,
       prob: probability_value, 
