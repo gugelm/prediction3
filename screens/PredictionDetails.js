@@ -230,6 +230,7 @@ const pickerSelectStyles = StyleSheet.create({
     marginLeft: 10,
     marginRight: 10,
     marginBottom: 15,
+    paddingRight: 1,
     backgroundColor: 'white',
   },
   inputAndroid: {
@@ -244,6 +245,7 @@ const pickerSelectStyles = StyleSheet.create({
     marginLeft: 10,
     marginRight: 10,
     marginBottom: 15,
+    paddingRight: 1,
     backgroundColor: 'white',
   },
 });
