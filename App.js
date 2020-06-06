@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { View, FlatList, Text, TextInput, Button, Alert } from 'react-native';
-import {ListItem, Input, FormLabel, FormInput, FormValidationMessage } from "react-native-elements";
+import { View, FlatList, Text, TextInput } from 'react-native';
+import {ListItem, Input, FormLabel, FormInput, FormValidationMessage, Button } from "react-native-elements";
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Icon } from 'react-native-vector-icons/FontAwesome'
@@ -11,11 +11,12 @@ import PredictionDetails from './screens/PredictionDetails'
 import Add from './screens/Add'
 import Login from './screens/Login'
 import Brier from './screens/Brier'
+import BrierDef from './screens/BrierDef'
 import { addPrediction } from './redux/actions'
 import { PersistGate } from 'redux-persist/integration/react'
 
 // DISABLE THIS WHEN YOU WANT PRESISTOR TO WORK
-persistor.purge()
+// persistor.purge()
 
 const Stack = createStackNavigator();
 
@@ -24,27 +25,44 @@ export function App() {
     <Provider store={store}>
     <PersistGate loading={null} persistor={persistor}>
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Predictions">
-        <Stack.Screen name="Login" component={Login} />
-        <Stack.Screen 
-          name="Predictions" 
-          component={HomeScreen}
-          options={({ navigation, route }) => ({
-              headerRight: () => (
-              <Button
-                title='Add Prediction'
-                onPress={() => navigation.navigate('Add')}
-              />
-            )})}
-        />
-        <Stack.Screen name="Prediction Details" component={PredictionDetails} />
-        <Stack.Screen name="Add" component={Add} />
-        <Stack.Screen name="Brier" component={Brier} />
-      </Stack.Navigator>
-    </NavigationContainer>
+        <Stack.Navigator initialRouteName="Predictions">
+          <Stack.Screen 
+            name="Login" 
+            component={Login} 
+          />
+          <Stack.Screen 
+            name="Predictions" 
+            component={HomeScreen}
+            options={({ navigation, route }) => ({
+                headerRight: () => (
+                <Button
+                  type='clear'
+                  title='Add Prediction'
+                  onPress={() => navigation.navigate('Add')}
+                />
+              )})}
+          />
+          <Stack.Screen 
+            name="Prediction Details" 
+            component={PredictionDetails}
+          />
+          <Stack.Screen 
+            name="Add" 
+            component={Add} 
+          />
+          <Stack.Screen 
+            name="Brier" 
+            component={Brier} 
+          />
+          <Stack.Screen 
+            name="Brier Score" 
+            component={BrierDef} 
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
     </PersistGate>
     </Provider>
-  );
+  )
 }
 
 export default App;

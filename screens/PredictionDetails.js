@@ -1,9 +1,9 @@
 import * as React from 'react';
-import { View, Text, ScrollView } from 'react-native';
+import { View, Text, KeyboardAvoidingView } from 'react-native';
 import { Input, ButtonGroup, Button } from "react-native-elements";
 import { store } from '../redux/store'
 import { useDispatch, useSelector } from 'react-redux'
-import { deletePrediction, updatePrediction } from '../redux/actions'
+import { deletePrediction, updatePrediction, updatePrediction2 } from '../redux/actions'
 
 export default function PredictionDetails({ route, navigation }) {
   
@@ -25,69 +25,78 @@ export default function PredictionDetails({ route, navigation }) {
   const happenedButtons = ['Waiting', 'Happened', 'Didn\'t Happen']
   const happenedStatus = useSelector(state => state.prediction.happened)
 
-  console.log(happenedEdit)
-
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-start', paddingTop: 25 }}>
+    <KeyboardAvoidingView 
+      behavior={Platform.OS == "ios" ? "padding" : "height"}
+      style={{ flex: 1, alignItems: 'flex-start', justifyContent: 'flex-start', paddingTop: 25 }}
+    >
       <Input
-        inputContainerStyle={{marginBottom: 25}}
+        inputContainerStyle={{marginBottom: 15}}
         label='Prediction'
         value= {predictionEdit}
         placeholder='Enter a quantifiable prediction.'
-        onChangeText={text => onChangePredVal(text)}
+        onChangeText={
+            predictionEdit => {
+              onChangePredVal(predictionEdit)
+              dispatch(updatePrediction(predictionEdit, deadlineEdit, probabilityEdit, reasoningEdit, now, key, happenedEdit))
+        }}
       />
       <Input
-        inputContainerStyle={{marginBottom: 25}}
+        inputContainerStyle={{marginBottom: 15}}
         label= 'Deadline'
         value={deadlineEdit} 
-        placeholder='Enter a deadline'
-        onChangeText={text => onChangeDeadVal(text)}
+        placeholder='Enter a deadline.'
+        onChangeText={
+          deadlineEdit => {
+          onChangeDeadVal(deadlineEdit)
+          dispatch(updatePrediction(predictionEdit, deadlineEdit, probabilityEdit, reasoningEdit, now, key, happenedEdit))
+        }}
       />
       <Input
-        inputContainerStyle={{marginBottom: 25}}
+        inputContainerStyle={{marginBottom: 15}}
         label= 'Probability'
         value={probabilityEdit} 
-        placeholder='Enter a deadline'
-        onChangeText={text => onChangeProbVal(text)}
+        placeholder='Enter the chances it will happen.'
+        onChangeText={
+          probabilityEdit => {
+          onChangeProbVal(probabilityEdit)
+          dispatch(updatePrediction(predictionEdit, deadlineEdit, probabilityEdit, reasoningEdit, now, key, happenedEdit))
+        }}
       />
       <Input
-        inputContainerStyle={{marginBottom: 25}}
+        inputContainerStyle={{marginBottom: 15}}
         label= 'Reasoning'
         value={reasoningEdit} 
-        placeholder='Enter a deadline'
-        onChangeText={text => onChangeReasoningVal(text)}
+        placeholder='Give your reasoning.'
+        onChangeText={
+            reasoningEdit => {
+            onChangeReasoningVal(reasoningEdit)
+            dispatch(updatePrediction(predictionEdit, deadlineEdit, probabilityEdit, reasoningEdit, now, key, happenedEdit))
+        }}
       />
       <Text style={{fontSize: 16, fontWeight: 'bold', color: 'rgb(134, 147, 158)', alignSelf: 'flex-start', marginLeft: 10}}>Did it happen?</Text>
       <ButtonGroup
         buttons={happenedButtons}
         selectedIndex={happenedEdit}
-        onPress={text => onChangeHappenedVal(text)}
-        containerStyle={{alignSelf: 'flex-start', width: 400}}
+        onPress={
+            happenedEdit => {
+            onChangeHappenedVal(happenedEdit)
+            dispatch(updatePrediction(predictionEdit, deadlineEdit, probabilityEdit, reasoningEdit, now, key, happenedEdit))
+        }}
+        containerStyle={{alignSelf: 'flex-start', width: 400, marginBottom: 15}}
       />
-      <View style={{ flexDirection: 'row', justifyContent: 'center', backgroundColor: 'white', position: 'absolute', left: 0, right: 0, bottom: 0}}>
       <Button 
-        title='Save'
-        buttonStyle={{width:150, padding: 10}} 
-        containerStyle={{padding:10}}
-        onPress={() => {
-                dispatch(updatePrediction(predictionEdit, deadlineEdit, probabilityEdit, reasoningEdit, now, key, happenedEdit))
-                navigation.navigate('Predictions')
-            }
-          }
-       />
-      <Button 
-        type='outline'
-        title='Delete'
+        type='clear'
+        title='Delete this prediction'
         titleStyle={{color:'red'}}
-        buttonStyle={{width:150, padding: 10, borderColor:'red'}} 
-        containerStyle={{padding:10}}
+        buttonStyle={{width:200, padding: 10, borderColor:'red', justifyContent: 'flex-start'}} 
+        containerStyle={{alignSelf: 'flex-start'}}
         onPress={() => {
                 dispatch(deletePrediction(predictionEdit))
                 navigation.navigate('Predictions')
             }
           }
        />
-      </View>
-    </View>
+    </KeyboardAvoidingView>
   );
 }

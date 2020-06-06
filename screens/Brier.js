@@ -1,12 +1,11 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import { View } from 'react-native';
-import { Button, Text, Slider } from 'react-native-elements'
-import Modal from 'modal-react-native-web'
+import { Button, Text, Overlay } from 'react-native-elements'
 import { store } from '../redux/store'
 import { useSelector } from 'react-redux'
 import HomeScreen from './HomeScreen'
 import Icon from 'react-native-vector-icons/FontAwesome'
-
+import BrierDef from './BrierDef'
 
 let brierScore = 0
 
@@ -43,6 +42,12 @@ return brierScore = predictionData.filter(x => x.happened > 0)
 
 export default function Brier({ route, navigation }) {
 const predictionData = useSelector(state => state.prediction)
+const [visible, setVisible] = useState(false)
+
+const toggleOverlay = () => {
+	setVisible(!visible);
+};
+
 brierScore = 0
 
 // Calculate the Brier Score
@@ -59,17 +64,24 @@ brierScore = brierScore / happenedCount
     <View style={{ flex: 1 }}>
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
 	    <Text style={{fontSize: 72, fontWeight: 'bold'}}>{precise(brierScore)}</Text>
-	    <Text>Brier Score measures the accuracy of probabilistic predictions.</Text>
-	    <Text>0 is the best. 2 is the worst.</Text>
+			<Button 
+			type="clear" 
+			title="What is a Brier Score?" 
+			onPress={() => {
+	                navigation.navigate('Brier Score')
+	            }
+	          }
+			/>
 	</View>
     <View style={{ flexDirection: 'row', justifyContent: 'center', backgroundColor: 'white', position: 'absolute', left: 0, right: 0, bottom: 0}}>
 	      <Button 
 	        title=' Predictions'
+	        titleStyle={{color:'gray'}}
 	        icon={
 	            <Icon
 	              name="arrow-circle-right"
 	              size={18}
-	              color='rgb(32, 137, 220)'
+	              color='gray'
 	            />
 	          }
 	        type='clear'
@@ -82,6 +94,7 @@ brierScore = brierScore / happenedCount
 	       />
 	       <Button 
 	        title=' Brier Score'
+	        titleStyle={{fontWeight: 'bold'}}
 	        icon={
 	            <Icon
 	              name="check-circle"

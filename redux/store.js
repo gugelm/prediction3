@@ -1,11 +1,13 @@
 import {createStore, applyMiddleware, combineReducers} from 'redux'
 import thunk from 'redux-thunk'
-import {updatePrediction} from './actions'
+import { updatePrediction } from './actions'
 import { persistStore, persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 
 // Happened: 
 // 0 = Waiting, 1 = Happened, 2 = Didn't Happen
+
+let predictionDataUpdate = []
 
 let predictionData = [
   {
@@ -34,11 +36,22 @@ function predictionStore(state=predictionData, action) {
 		case "DELETE_PREDICTION":
       return predictionData = predictionData.filter(a => a.prediction !== action.payload.prediction)
     case "UPDATE_PREDICTION":
-      return predictionData = Object.values({...predictionData, ...action.payload})
+      // this is probably a super weird way of doing it but it works... ¯\_(ツ)_/¯
+      // create a new array with just the stuff we're looking to update      
+      let predictionDataNew = predictionData.filter(b => b.key == action.payload.key)
+      console.log(predictionDataNew)
+      // then update with the new stuff
+      predictionDataNew = [{...predictionDataNew, ...action.payload}]
+      console.log(predictionDataNew)
+      // then delete the original entry
+      predictionData = predictionData.filter(b => b.key !== action.payload.key)
+      // then add the new data back to the main array
+      return predictionData = [...predictionData, ...predictionDataNew]
 		default:
 			return state
 	}
 }
+
 
 export const reducer = combineReducers({
   prediction: predictionStore,

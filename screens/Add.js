@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, Button } from 'react-native';
+import { View, Button, KeyboardAvoidingView } from 'react-native';
 import { Input } from "react-native-elements";
 import { store } from '../redux/store'
 import { useDispatch } from 'react-redux'
@@ -15,7 +15,10 @@ export default function Add({ route, navigation }) {
   const now = Date.now()
   
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <KeyboardAvoidingView 
+      behavior={Platform.OS == "ios" ? "padding" : "height"}
+      style={{ flex: 1, alignItems: 'flex-start', justifyContent: 'flex-start', paddingTop:25 }}
+    >
       <Input
         label='Prediction'
         placeholder='Enter a quantifiable prediction.'
@@ -50,6 +53,6 @@ export default function Add({ route, navigation }) {
           }
         />
       </View>
-    </View>
+    </KeyboardAvoidingView>
   );
 }

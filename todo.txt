@@ -1,2 +1,7 @@
-- bug with changing the 2nd prediction...
-- fix bottom nav
+- keep the order of the prediction consistent when you modify something
+- create some empty states
+	- brier score
+	- no predictions
+- add a datepicker
+- add a probability dropdown scroll
+- add validation

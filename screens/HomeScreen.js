@@ -71,9 +71,10 @@ export default function HomeScreen({ navigation }) {
     )} 
     />
   </View>
-  <View style={{ flexDirection: 'row', justifyContent: 'center', backgroundColor: 'white', position: 'absolute', left: 0, right: 0, bottom: 0}}>
+  <View style={{ flexDirection: 'row', justifyContent: 'center', backgroundColor: 'white', position: 'absolute', left: 0, right: 0, bottom: 0, paddingBottom: 15, paddingTop:10}}>
       <Button 
         title=' Predictions'
+        titleStyle={{fontWeight: 'bold'}}
         icon={
             <Icon
               name="arrow-circle-right"
@@ -82,7 +83,7 @@ export default function HomeScreen({ navigation }) {
             />
           }
         type='clear'
-        buttonStyle={{width:150, padding: 10}} 
+        buttonStyle={{width:175, padding: 10}} 
         containerStyle={{padding:10}}
         onPress={() => {
                 navigation.navigate('Predictions')
@@ -91,15 +92,16 @@ export default function HomeScreen({ navigation }) {
        />
        <Button 
         title=' Brier Score'
+        titleStyle={{color:'gray'}}
         icon={
             <Icon
               name="check-circle"
               size={18}
-              color='rgb(32, 137, 220)'
+              color='gray'
             />
           }
         type='clear'
-        buttonStyle={{width:150, padding: 10}} 
+        buttonStyle={{width:175, padding: 10}} 
         containerStyle={{padding:10}}
         onPress={() => {
                 navigation.navigate('Brier')
