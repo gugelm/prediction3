@@ -189,7 +189,8 @@ export default function PredictionDetails({ route, navigation }) {
             onChangeHappenedVal(happenedEdit)
             dispatch(updatePrediction(predictionEdit, deadlineMonEdit, deadlineYearEdit, probabilityEdit, reasoningEdit, now, key, happenedEdit))
         }}
-        containerStyle={{alignSelf: 'flex-start', width: 400, marginBottom: 15}}
+        containerStyle={{alignSelf: 'flex-start', alignSelf: 'stretch', marginBottom: 105}}
+        textStyle={{fontSize: 16, fontWeight: 'normal'}}
       />
       <Button 
         type='clear'
