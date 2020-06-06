@@ -3,5 +3,4 @@
 	- brier score
 	- no predictions
 - add a datepicker
-- add a probability dropdown scroll
 - add validation

@@ -16,7 +16,7 @@ import { addPrediction } from './redux/actions'
 import { PersistGate } from 'redux-persist/integration/react'
 
 // DISABLE THIS WHEN YOU WANT PRESISTOR TO WORK
-// persistor.purge()
+ persistor.purge()
 
 const Stack = createStackNavigator();
 

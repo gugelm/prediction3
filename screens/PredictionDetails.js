@@ -1,9 +1,10 @@
 import * as React from 'react';
-import { View, Text, KeyboardAvoidingView } from 'react-native';
+import { View, Text, KeyboardAvoidingView, StyleSheet } from 'react-native';
 import { Input, ButtonGroup, Button } from "react-native-elements";
 import { store } from '../redux/store'
 import { useDispatch, useSelector } from 'react-redux'
 import { deletePrediction, updatePrediction, updatePrediction2 } from '../redux/actions'
+import RNPickerSelect from 'react-native-picker-select'
 
 export default function PredictionDetails({ route, navigation }) {
   
@@ -27,7 +28,6 @@ export default function PredictionDetails({ route, navigation }) {
 
   return (
     <KeyboardAvoidingView 
-      behavior={Platform.OS == "ios" ? "padding" : "height"}
       style={{ flex: 1, alignItems: 'flex-start', justifyContent: 'flex-start', paddingTop: 25 }}
     >
       <Input
@@ -52,7 +52,33 @@ export default function PredictionDetails({ route, navigation }) {
           dispatch(updatePrediction(predictionEdit, deadlineEdit, probabilityEdit, reasoningEdit, now, key, happenedEdit))
         }}
       />
-      <Input
+      <Text 
+        style={{fontSize: 16, fontWeight: 'bold', color: 'rgb(134, 147, 158)', alignSelf: 'flex-start', marginLeft: 10, marginBottom: 10}}>
+        Probability
+      </Text>
+      <RNPickerSelect
+            onValueChange={
+              probabilityEdit => {
+              onChangeProbVal(Number(probabilityEdit))
+              dispatch(updatePrediction(predictionEdit, deadlineEdit, Number(probabilityEdit), reasoningEdit, now, key, happenedEdit))
+            }}
+            value={probabilityEdit} 
+            items={[
+                { label: '10%', value: .1 },
+                { label: '20%', value: .2 },
+                { label: '30%', value: .3 },
+                { label: '40%', value: .4 },
+                { label: '50%', value: .5 },
+                { label: '60%', value: .6 },
+                { label: '70%', value: .7 },
+                { label: '80%', value: .8 },
+                { label: '90%', value: .9 },
+                { label: '100%', value: 1 },
+            ]}
+            style={pickerSelectStyles}
+        />
+
+{/*      <Input
         inputContainerStyle={{marginBottom: 15}}
         label= 'Probability'
         value={probabilityEdit} 
@@ -62,10 +88,11 @@ export default function PredictionDetails({ route, navigation }) {
           onChangeProbVal(probabilityEdit)
           dispatch(updatePrediction(predictionEdit, deadlineEdit, probabilityEdit, reasoningEdit, now, key, happenedEdit))
         }}
-      />
+      />*/}
       <Input
         inputContainerStyle={{marginBottom: 15}}
         label= 'Reasoning'
+        labelStyle={{marginTop:15}}
         value={reasoningEdit} 
         placeholder='Give your reasoning.'
         onChangeText={
@@ -100,3 +127,32 @@ export default function PredictionDetails({ route, navigation }) {
     </KeyboardAvoidingView>
   );
 }
+
+const pickerSelectStyles = StyleSheet.create({
+  inputIOS: {
+    fontSize: 16,
+    paddingVertical: 12,
+    paddingHorizontal: 10,
+    borderWidth: 1,
+    borderColor: 'gray',
+    borderRadius: 4,
+    color: 'black',
+    paddingRight: 30, // to ensure the text is never behind the icon
+    marginLeft: 10,
+    marginRight: 10,
+    marginBottom: 15,
+  },
+  inputAndroid: {
+    fontSize: 16,
+    paddingHorizontal: 10,
+    paddingVertical: 8,
+    borderWidth: 0.5,
+    borderColor: 'gray',
+    borderRadius: 8,
+    color: 'black',
+    paddingRight: 30, // to ensure the text is never behind the icon
+    marginLeft: 10,
+    marginRight: 10,
+    marginBottom: 15,
+  },
+});

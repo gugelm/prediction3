@@ -73,7 +73,7 @@ brierScore = brierScore / happenedCount
 	          }
 			/>
 	</View>
-    <View style={{ flexDirection: 'row', justifyContent: 'center', backgroundColor: 'white', position: 'absolute', left: 0, right: 0, bottom: 0}}>
+<View style={{ flexDirection: 'row', justifyContent: 'center', backgroundColor: 'white', position: 'absolute', left: 0, right: 0, bottom: 0, paddingBottom: 15, paddingTop:10}}>
 	      <Button 
 	        title=' Predictions'
 	        titleStyle={{color:'gray'}}
