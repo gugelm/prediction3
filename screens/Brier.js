@@ -85,7 +85,7 @@ brierScore = brierScore / happenedCount
 	            />
 	          }
 	        type='clear'
-	        buttonStyle={{width:150, padding: 10}} 
+	        buttonStyle={{width:175, padding: 10}} 
 	        containerStyle={{padding:10}}
 	        onPress={() => {
 	                navigation.navigate('Predictions')
@@ -103,7 +103,7 @@ brierScore = brierScore / happenedCount
 	            />
 	          }
 	        type='clear'
-	        buttonStyle={{width:150, padding: 10}} 
+	        buttonStyle={{width:175, padding: 10}} 
 	        containerStyle={{padding:10}}
 	        onPress={() => {
 	                navigation.navigate('Brier')

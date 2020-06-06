@@ -65,7 +65,7 @@ export default function HomeScreen({ navigation }) {
       onPress={() =>
         navigation.navigate(
           'Prediction Details', 
-          {key: item.key, prediction: item.prediction, deadline: item.deadline, prob: item.prob, reasoning: item.reasoning, happened: item.happened})
+          {key: item.key, prediction: item.prediction, deadlineMon: item.deadlineMon, deadlineYear: item.deadlineYear, prob: item.prob, reasoning: item.reasoning, happened: item.happened})
         }
       />
     )} 
