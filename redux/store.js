@@ -12,33 +12,33 @@ let predictionDataUpdate = []
 let predictionData = [
   {
   "key":"1",
-  "prediction":"5,000 COVID19 cases in the US.",
+  "prediction":"COVID19 cases won't exceed 3M in the US.",
   "created_date":"2/1/2019",
   "prob":.9,
   "deadlineMon":"Apr",
   "deadlineYear": "2020",
   "reasoning": "My Excel model predicts at least 5,000 - 10,000 cases.",
-  "happened": 1
+  "happened": 0
   }, 
   {
   "key":"2",
-  "prediction":"Trump will win the 2020 election.",
+  "prediction":"John Doe will get engaged.",
   "created_date":"10/8/2019",
   "prob": .7,
   "deadlineMon":"Nov",
   "deadlineYear": "2020",
   "reasoning": "Because reasons.",
-  "happened": 0
+  "happened": 2
   },
   {
   "key":"3",
-  "prediction":"Hilary will win the 2016 election.",
+  "prediction":"Toys R Us will go out of business.",
   "created_date":"10/8/2015",
   "prob": .7,
   "deadlineMon":"Nov",
   "deadlineYear": "2016",
   "reasoning": "Because reasons.",
-  "happened": 2
+  "happened": 1
   }
   ]
 
